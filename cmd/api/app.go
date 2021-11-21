@@ -3,6 +3,7 @@ package api
 import (
 	"IAGE-test-task/services/task1"
 	"IAGE-test-task/services/task2"
+	"IAGE-test-task/services/task3"
 	"flag"
 	"github.com/go-redis/redis/v8"
 	"github.com/gorilla/mux"
@@ -38,10 +39,11 @@ func NewListener() (net.Listener, error) {
 	return net.Listen("tcp", ":8080")
 }
 
-func NewRouter(task1Handlers task1.HandlersHTTP, task2Handlers task2.HandlersHTTP) http.Handler {
+func NewRouter(task1Handlers task1.HandlersHTTP, task2Handlers task2.HandlersHTTP, task3Handlers task3.HandlersHTTP) http.Handler {
 	r := mux.NewRouter().StrictSlash(true)
 	r.Handle("/task1", task1Handlers.Find).Methods("POST")
 	r.Handle("/task2", task2Handlers.Find).Methods("POST")
+	r.Handle("/task3", task3Handlers.Find).Methods("POST")
 	return r
 }
 
