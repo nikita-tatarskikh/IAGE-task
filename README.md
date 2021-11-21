@@ -11,6 +11,6 @@
 2) chmod +x main
 3) ./main -host=redis_host -port=redis_port 
 ### Приложение стартует на localhost:8080, 
-- /task1, 
-- /task2, 
+- /task1 
+- /task2 
 - /task3
