@@ -21,8 +21,14 @@ func (p *httpProvider) find(w http.ResponseWriter, r *http.Request) {
 	var requestData Request
 	_ = json.NewDecoder(r.Body).Decode(&requestData)
 	client := p.svc.ExecuteTask1(&requestData)
-	w.Header().Set("Content-Type", "application/json")
-	_ = json.NewEncoder(w).Encode(client)
+	if client != nil {
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(client)
+	} else {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte("При выполнении запроса произошла ошибка"))
+	}
+
 }
 
 func NewHTTPProvider(svc Service) HandlersHTTP {

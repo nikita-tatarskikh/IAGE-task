@@ -3,7 +3,6 @@ package task3
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"net"
 	"strings"
 )
@@ -19,14 +18,13 @@ func (m *Multiply) Multiply(request *Request) string {
 		s = append(s, req.B)
 		s = append(s, "\n")
 		forTCP := strings.Join(s, "")
-		log.Println(forTCP)
 		conn, _ := net.Dial("tcp", "127.0.0.1:8081")
 		fmt.Fprintf(conn, forTCP)
 		message, _ := bufio.NewReader(conn).ReadString('\n')
-		fmt.Print("Message from server: " + message)
+		fmt.Print("Task3 - Message from tcp server: " + message)
 		conn.Close()
 	}
-	return "forTCP"
+	return "Пункт выполнен частично. Результат в логе."
 }
 
 
